@@ -1,0 +1,41 @@
+{
+
+  "manifest_version": 2,
+  "name": "Web Rich Presence",
+  "version": "1.0.2",
+
+  "description": "Link websites with Discord",
+
+  "icons": {
+    "48": "icons/icon.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://soundcloud.com/*"],
+      "js": ["soundcloud.js"]
+    },
+	{
+      "matches": [ "*://*.crunchyroll.com/*", "*://crunchyroll.com/*" ],
+      "js": [ "crunchyroll.js" ],
+      "run_at":    "document_end"
+    },
+    {
+      "matches": [ "*://*.animedigitalnetwork.fr/*", "*://animedigitalnetwork.fr/*" ],
+      "js": [ "adn.js" ],
+      "run_at":    "document_end"
+    },
+    {
+      "matches": [ "*://*.wakanim.tv/*", "*://wakanim.tv/*" ],
+      "js": [ "wakanim.js" ],
+      "run_at":    "document_end"
+    }
+  ],
+
+  "applications": {
+    "gecko": {
+      "id": "{70fb31db-4e91-4d38-bb9e-136b0ed80115}",
+      "strict_min_version": "52.0"
+    }
+  }
+}
