@@ -13,21 +13,21 @@
   "content_scripts": [
     {
       "matches": ["*://soundcloud.com/*"],
-      "js": ["soundcloud.js"]
+      "js": ["scripts/soundcloud.js"]
     },
 	{
       "matches": [ "*://*.crunchyroll.com/*", "*://crunchyroll.com/*" ],
-      "js": [ "crunchyroll.js" ],
+      "js": [ "scripts/crunchyroll.js" ],
       "run_at":    "document_end"
     },
     {
       "matches": [ "*://*.animedigitalnetwork.fr/*", "*://animedigitalnetwork.fr/*" ],
-      "js": [ "adn.js" ],
+      "js": [ "scripts/adn.js" ],
       "run_at":    "document_end"
     },
     {
       "matches": [ "*://*.wakanim.tv/*", "*://wakanim.tv/*" ],
-      "js": [ "wakanim.js" ],
+      "js": [ "scripts/wakanim.js" ],
       "run_at":    "document_end"
     }
   ],

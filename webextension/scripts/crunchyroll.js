@@ -1,5 +1,5 @@
 var s = document.createElement('script');
-s.src = chrome.extension.getURL('crunchyroll-script.js');
+s.src = chrome.extension.getURL('scripts/crunchyroll-script.js');
 (document.head||document.documentElement).appendChild(s);
 s.onload = function() {
     s.remove();
