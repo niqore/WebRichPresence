@@ -29,6 +29,11 @@
       "matches": [ "*://*.wakanim.tv/*", "*://wakanim.tv/*" ],
       "js": [ "scripts/wakanim.js" ],
       "run_at":    "document_end"
+    },
+    {
+      "matches": [ "*://*.netflix.com/*", "*://netflix.com/*" ],
+      "js": [ "scripts/netflix.js" ],
+      "run_at":    "document_end"
     }
   ],
 
