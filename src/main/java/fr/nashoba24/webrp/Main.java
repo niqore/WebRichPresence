@@ -37,6 +37,7 @@ public class Main {
         modules.put("adn", new ADNModule());
         modules.put("wakanim", new WakanimModule());
         modules.put("netflix", new NetflixModule());
+        modules.put("primevideo", new PrimeVideoModule());
     }
 
     public static Module getModuleFromName(String name) {
