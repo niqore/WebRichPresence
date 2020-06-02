@@ -36,6 +36,7 @@ public class Main {
         modules.put("crunchyroll", new CrunchyrollModule());
         modules.put("adn", new ADNModule());
         modules.put("wakanim", new WakanimModule());
+        modules.put("netflix", new NetflixModule());
     }
 
     public static Module getModuleFromName(String name) {
