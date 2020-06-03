@@ -3,7 +3,7 @@ package fr.nashoba24.webrp.modules;
 import club.minnced.discord.rpc.DiscordRichPresence;
 import org.json.simple.JSONObject;
 
-public abstract class SeriesModule implements Module {
+public class SeriesModule extends Module {
 
     private String title = "";
     private String episode;
@@ -11,6 +11,10 @@ public abstract class SeriesModule implements Module {
     private long totalTime;
     private boolean playing;
     private long lastTime;
+
+    public SeriesModule(String moduleName, String appId) {
+        super(moduleName, appId);
+    }
 
     public DiscordRichPresence formatRichPresence(DiscordRichPresence presence, JSONObject data) {
 

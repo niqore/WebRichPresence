@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.net.BindException;
 import java.net.InetSocketAddress;
 
 public class SocketServer extends WebSocketServer {
@@ -24,11 +25,21 @@ public class SocketServer extends WebSocketServer {
         this.callback = callback;
     }
 
-    private void removeConnectionModule() {
+    public void removeConnectionModule() {
         if (currModule != null && currModule.snd != null) {
+            if (currModule.fst.isOpen()) {
+                currModule.fst.close();
+            }
             callback.closeConnection(currModule.snd);
         }
         currModule = null;
+    }
+
+    public Module getCurrentModule() {
+        if (currModule == null) {
+            return null;
+        }
+        return currModule.snd;
     }
 
     @Override
@@ -45,7 +56,7 @@ public class SocketServer extends WebSocketServer {
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
         if (currModule != null && conn == currModule.fst) {
-            System.out.println("Module disconnected: " + currModule.snd);
+            System.out.println("Module disconnected: " + currModule.snd.getModuleName());
             removeConnectionModule();
         }
     }
@@ -55,7 +66,12 @@ public class SocketServer extends WebSocketServer {
         if (currModule != null && currModule.fst.getRemoteSocketAddress().getAddress() == currModule.fst.getRemoteSocketAddress().getAddress()) {
             if (message.charAt(0) == 'a') {
                 currModule.snd = Main.getModuleFromName(message.substring(1));
-                System.out.println("Module connected: " + message.substring(1));
+                if (!currModule.snd.isEnabled()) {
+                    System.out.println("Module " + currModule.snd.getModuleName() + " is disabled");
+                    removeConnectionModule();
+                    return;
+                }
+                System.out.println("Module connected: " + currModule.snd.getModuleName());
             } else if (message.charAt(0) == 'b' && currModule.snd != null) {
                 try {
                     callback.socketMessage(currModule.snd, (JSONObject) new JSONParser().parse(message.substring(1)));
@@ -69,6 +85,10 @@ public class SocketServer extends WebSocketServer {
     @Override
     public void onError(WebSocket conn, Exception ex) {
         System.out.println("Connection error");
+        if (ex instanceof BindException) {
+            System.out.println("The port " + TCP_PORT + " is already used");
+            System.exit(0);
+        }
         ex.printStackTrace();
         if (currModule != null && conn == currModule.fst) {
             removeConnectionModule();

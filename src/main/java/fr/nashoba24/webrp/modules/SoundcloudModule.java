@@ -3,7 +3,7 @@ package fr.nashoba24.webrp.modules;
 import club.minnced.discord.rpc.DiscordRichPresence;
 import org.json.simple.JSONObject;
 
-public class SoundcloudModule implements Module {
+public class SoundcloudModule extends Module {
 
     private String title;
     private String author;
@@ -12,11 +12,8 @@ public class SoundcloudModule implements Module {
     private boolean playing;
     private long lastTime;
 
-    public SoundcloudModule() {
-    }
-
-    public String getApplicationId() {
-        return "690280081851285524";
+    public SoundcloudModule(String moduleName, String appId) {
+        super(moduleName, appId);
     }
 
     public DiscordRichPresence formatRichPresence(DiscordRichPresence presence, JSONObject data) {
