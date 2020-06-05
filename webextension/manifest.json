@@ -13,37 +13,54 @@
   "content_scripts": [
     {
       "matches": ["*://soundcloud.com/*"],
-      "js": ["scripts/soundcloud.js"]
+      "js": [ "scripts/connect.js", "scripts/websites/soundcloud.js" ]
     },
 	{
       "matches": [ "*://*.crunchyroll.com/*", "*://crunchyroll.com/*" ],
-      "js": [ "scripts/crunchyroll.js" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/crunchyroll/crunchyroll.js" ],
       "run_at":    "document_end"
     },
     {
       "matches": [ "*://*.animedigitalnetwork.fr/*", "*://animedigitalnetwork.fr/*" ],
-      "js": [ "scripts/adn.js" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/adn.js" ],
       "run_at":    "document_end"
     },
     {
       "matches": [ "*://*.wakanim.tv/*", "*://wakanim.tv/*" ],
-      "js": [ "scripts/wakanim.js" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/wakanim.js" ],
       "run_at":    "document_end"
     },
     {
       "matches": [ "*://*.netflix.com/*", "*://netflix.com/*" ],
-      "js": [ "scripts/netflix.js" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/netflix.js" ],
       "run_at":    "document_end"
     },
     {
       "matches": [ "*://*.primevideo.com/*", "*://primevideo.com/*" ],
-      "js": [ "scripts/primevideo.js" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/primevideo.js" ],
+      "run_at":    "document_end"
+    },
+	{
+      "matches": [ "*://*.pstream.net/*", "*://pstream.net/*" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/pstream.js" ],
+      "run_at":    "document_end",
+	  "all_frames": true
+    },
+	{
+      "matches": [ "*://*.mystream.to/*", "*://mystream.to/*" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/mystream.js" ],
+      "run_at":    "document_end",
+	  "all_frames": true
+    },
+	{
+      "matches": [ "*://*.neko-sama.fr/*", "*://neko-sama.fr/*" ],
+      "js": [ "scripts/websites/neko-sama.js" ],
       "run_at":    "document_end"
     }
   ],
 
   "web_accessible_resources": [
-    "scripts/crunchyroll-script.js"
+    "scripts/websites/crunchyroll/crunchyroll-script.js"
   ],
 
   "applications": {

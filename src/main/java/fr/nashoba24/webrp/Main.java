@@ -56,6 +56,8 @@ public class Main {
         modules.put("wakanim", new SeriesModule("Wakanim", "717148086585131009"));
         modules.put("netflix", new SeriesModule("Netflix", "717421367607427162"));
         modules.put("primevideo", new SeriesModule("Prime Video", "717443400684666941"));
+
+        modules.put("nekosama", new SeriesModule("Neko-Sama", "718190543087075359"));
     }
 
     public static Module getModuleFromName(String name) {

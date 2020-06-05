@@ -1,12 +1,11 @@
 var s = document.createElement('script');
-s.src = chrome.extension.getURL('scripts/crunchyroll-script.js');
+s.src = chrome.extension.getURL('scripts/websites/crunchyroll/crunchyroll-script.js');
 (document.head||document.documentElement).appendChild(s);
 s.onload = function() {
     s.remove();
 };
 
 var interval = 1;
-var connection = new WebSocket('ws://127.0.0.1:54917');
 var isVideo, currentTime, duration, playing;
 
 document.addEventListener('RW759_connectExtension', function(e) {
@@ -15,14 +14,6 @@ document.addEventListener('RW759_connectExtension', function(e) {
     duration = Math.floor(e.detail[2]);
     playing = e.detail[3];
 });
-
-function send_data(title, episode, progressTime, totalTime, playing) {
-    connection.send('b{"title":"' + title + '","episode":"' + episode + '","progressTime":' + progressTime + ',"totalTime":' + totalTime + ',"playing":' + playing + '}');
-}
-
-function send_no_video() {
-    connection.send('b{"title":"none"}');
-}
 
 function poll_activity() {
 
@@ -50,10 +41,4 @@ connection.onopen = function () {
     connection.send('acrunchyroll')
     poll_activity();
     setInterval(poll_activity, interval * 1000);
-};
-
-connection.onerror = function (error) {
-};
-
-connection.onmessage = function (e) {
 };

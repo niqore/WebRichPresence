@@ -1,5 +1,4 @@
 var interval = 1;
-var connection = new WebSocket('ws://127.0.0.1:54917');
 
 function send_data(title, author, progressTime, totalTime, playing) {
 	connection.send('b{"title":"' + title + '","author":"' + author + '","progressTime":' + progressTime + ',"totalTime":' + totalTime + ',"playing":' + playing + '}');

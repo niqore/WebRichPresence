@@ -56,7 +56,12 @@ public class SocketServer extends WebSocketServer {
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
         if (currModule != null && conn == currModule.fst) {
-            System.out.println("Module disconnected: " + currModule.snd.getModuleName());
+            if (currModule.snd != null) {
+                System.out.println("Module disconnected: " + currModule.snd.getModuleName());
+            }
+            else {
+                System.out.println("Connection closed");
+            }
             removeConnectionModule();
         }
     }
@@ -66,6 +71,11 @@ public class SocketServer extends WebSocketServer {
         if (currModule != null && currModule.fst.getRemoteSocketAddress().getAddress() == currModule.fst.getRemoteSocketAddress().getAddress()) {
             if (message.charAt(0) == 'a') {
                 currModule.snd = Main.getModuleFromName(message.substring(1));
+                if (currModule.snd == null) {
+                    System.out.println("Module " + message.substring(1) + " not found. Disconnection...");
+                    removeConnectionModule();
+                    return;
+                }
                 if (!currModule.snd.isEnabled()) {
                     System.out.println("Module " + currModule.snd.getModuleName() + " is disabled");
                     removeConnectionModule();
