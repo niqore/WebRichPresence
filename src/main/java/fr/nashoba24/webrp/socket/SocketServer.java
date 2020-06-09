@@ -25,14 +25,18 @@ public class SocketServer extends WebSocketServer {
         this.callback = callback;
     }
 
-    public void removeConnectionModule() {
-        if (currModule != null && currModule.snd != null) {
-            if (currModule.fst.isOpen()) {
-                currModule.fst.close();
-            }
+    public void removeConnectionModule(WebSocket conn) {
+        if (currModule != null && currModule.fst == conn) {
             callback.closeConnection(currModule.snd);
+            currModule = null;
         }
-        currModule = null;
+        if (conn.isOpen()) {
+            conn.close();
+        }
+    }
+
+    public void removeConnectedModule() {
+        removeConnectionModule(currModule.fst);
     }
 
     public Module getCurrentModule() {
@@ -44,13 +48,7 @@ public class SocketServer extends WebSocketServer {
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        if (currModule != null && currModule.fst.isOpen()) {
-            System.out.println("A module tried to connect but an other module is already active");
-            conn.close();
-            return;
-        }
         System.out.println("New connection from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
-        currModule = new Pair<>(conn, null);
     }
 
     @Override
@@ -58,36 +56,37 @@ public class SocketServer extends WebSocketServer {
         if (currModule != null && conn == currModule.fst) {
             if (currModule.snd != null) {
                 System.out.println("Module disconnected: " + currModule.snd.getModuleName());
-            }
-            else {
+            } else {
                 System.out.println("Connection closed");
             }
-            removeConnectionModule();
+            removeConnectionModule(conn);
         }
     }
 
     @Override
     public void onMessage(WebSocket conn, String message) {
-        if (currModule != null && currModule.fst.getRemoteSocketAddress().getAddress() == currModule.fst.getRemoteSocketAddress().getAddress()) {
-            if (message.charAt(0) == 'a') {
-                currModule.snd = Main.getModuleFromName(message.substring(1));
-                if (currModule.snd == null) {
-                    System.out.println("Module " + message.substring(1) + " not found. Disconnection...");
-                    removeConnectionModule();
-                    return;
-                }
-                if (!currModule.snd.isEnabled()) {
-                    System.out.println("Module " + currModule.snd.getModuleName() + " is disabled");
-                    removeConnectionModule();
-                    return;
-                }
-                System.out.println("Module connected: " + currModule.snd.getModuleName());
-            } else if (message.charAt(0) == 'b' && currModule.snd != null) {
-                try {
-                    callback.socketMessage(currModule.snd, (JSONObject) new JSONParser().parse(message.substring(1)));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+        if (message.charAt(0) == 'a') {
+            if (currModule != null) {
+                System.out.println("Module " + message.substring(1) + " tried to connect but another one is already active");
+            }
+            Module m = Main.getModuleFromName(message.substring(1));
+            if (m == null) {
+                System.out.println("Module " + message.substring(1) + " not found. Disconnection...");
+                removeConnectionModule(conn);
+                return;
+            }
+            if (!m.isEnabled()) {
+                System.out.println("Module " + currModule.snd.getModuleName() + " is disabled");
+                removeConnectionModule(conn);
+                return;
+            }
+            currModule = new Pair<>(conn, m);
+            System.out.println("Module connected: " + currModule.snd.getModuleName());
+        } else if (message.charAt(0) == 'b' && currModule != null && conn.getRemoteSocketAddress().getAddress() == currModule.fst.getRemoteSocketAddress().getAddress() && currModule.snd != null) {
+            try {
+                callback.socketMessage(currModule.snd, (JSONObject) new JSONParser().parse(message.substring(1)));
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -100,9 +99,7 @@ public class SocketServer extends WebSocketServer {
             System.exit(0);
         }
         ex.printStackTrace();
-        if (currModule != null && conn == currModule.fst) {
-            removeConnectionModule();
-        }
+        removeConnectionModule(conn);
     }
 
     @Override

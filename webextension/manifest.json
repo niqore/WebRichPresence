@@ -42,13 +42,13 @@
     },
 	{
       "matches": [ "*://*.pstream.net/*", "*://pstream.net/*" ],
-      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/pstream.js" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/pstream.js", "scripts/video-iframe.js" ],
       "run_at":    "document_end",
 	  "all_frames": true
     },
 	{
       "matches": [ "*://*.mystream.to/*", "*://mystream.to/*" ],
-      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/mystream.js" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/mystream.js", "scripts/video-iframe.js" ],
       "run_at":    "document_end",
 	  "all_frames": true
     },
@@ -56,6 +56,35 @@
       "matches": [ "*://*.neko-sama.fr/*", "*://neko-sama.fr/*" ],
       "js": [ "scripts/websites/neko-sama.js" ],
       "run_at":    "document_end"
+    },
+	{
+      "matches": [ "*://*.fullanimefr.com/*", "*://fullanimefr.com/*" ],
+      "js": [ "scripts/websites/fullanimefr.js" ],
+      "run_at":    "document_end"
+    },
+	{
+      "matches": [ "*://*.gounlimited.to/*", "*://gounlimited.to/*" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/gounlimited.js", "scripts/video-iframe.js" ],
+      "run_at":    "document_end",
+	  "all_frames": true
+    },
+	{
+      "matches": [ "*://*.xupload.ws/*", "*://xupload.ws/*" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/xupload.js", "scripts/video-iframe.js" ],
+      "run_at":    "document_end",
+	  "all_frames": true
+    },
+	{
+      "matches": [ "*://*.sendvid.com/*", "*://sendvid.com/*" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/sendvid.js", "scripts/video-iframe.js" ],
+      "run_at":    "document_end",
+	  "all_frames": true
+    },
+	{
+      "matches": [ "*://*.uqload.com/*", "*://uqload.com/*" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/uqload.js", "scripts/video-iframe.js" ],
+      "run_at":    "document_end",
+	  "all_frames": true
     }
   ],
 

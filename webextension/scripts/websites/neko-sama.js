@@ -6,7 +6,7 @@ function send_details(iframe, url) {
 
 function check_details_sent() {
 	let iframe = document.getElementById('un_episode');
-	if (iframe && !iframe.details_sent) {
+	if (iframe && !iframe.details_sent && iframe.readystate == 'complete') {
 		if (iframe.src.includes("pstream")) {
 			send_details(iframe, 'https://www.pstream.net');
 		}

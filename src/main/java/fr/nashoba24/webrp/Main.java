@@ -58,6 +58,7 @@ public class Main {
         modules.put("primevideo", new SeriesModule("Prime Video", "717443400684666941"));
 
         modules.put("nekosama", new SeriesModule("Neko-Sama", "718190543087075359"));
+        modules.put("fullanimefr", new SeriesModule("FullAnimeVF (fullanimefr.com)", "718190543087075359"));
     }
 
     public static Module getModuleFromName(String name) {
@@ -96,7 +97,7 @@ public class Main {
                 configuration.save();
                 Module currModule = getSocketServer().getCurrentModule();
                 if (currModule == set.getValue() && !enabled) {
-                    getSocketServer().removeConnectionModule();
+                    getSocketServer().removeConnectedModule();
                 }
             });
             modulesMenu.add(cmi);
