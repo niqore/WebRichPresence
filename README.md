@@ -8,3 +8,7 @@ Supported websites:
 * Anime Digital Network
 * Crunchyroll
 * Wakanim
+* Neko-Sama
+* FullAnimeVF
+* Netflix
+* Prime Video
