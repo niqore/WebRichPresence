@@ -90,12 +90,5 @@
 
   "web_accessible_resources": [
     "scripts/websites/crunchyroll/crunchyroll-script.js"
-  ],
-
-  "applications": {
-    "gecko": {
-      "id": "{70fb31db-4e91-4d38-bb9e-136b0ed80115}",
-      "strict_min_version": "52.0"
-    }
-  }
+  ]
 }
