@@ -59,6 +59,7 @@ public class Main {
 
         modules.put("nekosama", new SeriesModule("Neko-Sama", "718190543087075359"));
         modules.put("fullanimefr", new SeriesModule("FullAnimeVF (fullanimefr.com)", "718190543087075359"));
+        modules.put("mavanimes", new SeriesModule("Mavanimes", "718190543087075359"));
     }
 
     public static Module getModuleFromName(String name) {

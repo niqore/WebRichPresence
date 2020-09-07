@@ -85,6 +85,17 @@
       "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/uqload.js", "scripts/video-iframe.js" ],
       "run_at":    "document_end",
 	  "all_frames": true
+    },
+	{
+      "matches": [ "*://*.mavanimes.co/*", "*://mavanimes.co/*" ],
+      "js": [ "scripts/websites/mavanimes.js" ],
+      "run_at":    "document_end"
+    },
+	{
+      "matches": [ "*://*.mavplay.com/*", "*://mavplay.com/*" ],
+      "js": [ "scripts/connect.js", "scripts/video-utils.js", "scripts/websites/mavplay.js", "scripts/video-iframe.js" ],
+      "run_at":    "document_end",
+	  "all_frames": true
     }
   ],
 
