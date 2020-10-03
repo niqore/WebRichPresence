@@ -14,9 +14,13 @@ function poll_activity() {
         return;
     }
 
-    var title = document.getElementsByClassName('fgzdi7m f10ip5t1 fs89ngr')[0].innerHTML,
-        episode = document.getElementsByClassName('f15586js f1iodedr fdm7v fs89ngr')[0].innerHTML,
+    var title = document.getElementsByClassName('fgzdi7m f10ip5t1 fva8997')[0].innerHTML,
+        episode = document.getElementsByClassName('f15586js f1iodedr fdm7v fva8997')[0].innerHTML,
         playing = !document.getElementsByClassName('scalingVideoContainerBottom')[0].children[0].children[1].paused;
+
+    episode = episode.replace(/"/g, "'");
+    episode = episode.replace(/&nbsp;/g, " ");
+    console.log(episode);
 
     if (!title || !episode) {
         send_no_video();

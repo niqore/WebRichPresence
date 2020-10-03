@@ -14,8 +14,12 @@ function poll_activity() {
         return;
     }
 
-    var saison = document.getElementsByClassName("episode_h1")[0].children[0].children[1].innerHTML,
-        title = document.getElementsByClassName("episode_h1")[0].children[1].innerHTML + " " + saison,
+    var saison = "";
+    if (document.getElementsByClassName("episode_h1")[0].children[0].children[1] != undefined) {
+        saison += " " + document.getElementsByClassName("episode_h1")[0].children[0].children[1].innerHTML;
+    }
+
+    var title = document.getElementsByClassName("episode_h1")[0].children[1].innerHTML + saison,
         numEpisode = document.getElementsByClassName("episode_h1")[0].children[0].children[0].children[0].innerHTML,
         episode = "Épisode " + numEpisode,
         playing = !document.getElementsByClassName("jw-video jw-reset")[0].paused;
