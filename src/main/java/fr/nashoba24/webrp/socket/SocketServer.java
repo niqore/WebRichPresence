@@ -84,6 +84,7 @@ public class SocketServer extends WebSocketServer {
             System.out.println("Module connected: " + currModule.snd.getModuleName());
         } else if (message.charAt(0) == 'b' && currModule != null && conn.getRemoteSocketAddress().getAddress() == currModule.fst.getRemoteSocketAddress().getAddress() && currModule.snd != null) {
             try {
+                System.out.println(message.substring(1));
                 callback.socketMessage(currModule.snd, (JSONObject) new JSONParser().parse(message.substring(1)));
             } catch (ParseException e) {
                 e.printStackTrace();
