@@ -44,10 +44,20 @@ public class SoundcloudModule extends Module {
     }
 
     private String getTitle(JSONObject data) {
-        return (String) data.get("title");
+        String title = (String) data.get("title");
+        String[] parts = title.split(" - ");
+        if (parts.length == 2) {
+            return parts[1];
+        }
+        return title;
     }
 
     private String getAuthor(JSONObject data) {
+        String title = (String) data.get("title");
+        String[] parts = title.split(" - ");
+        if (parts.length == 2) {
+            return parts[0];
+        }
         return (String) data.get("author");
     }
 
