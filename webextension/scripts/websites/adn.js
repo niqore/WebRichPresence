@@ -2,21 +2,21 @@ var interval = 1;
 
 function poll_activity() {
 
-    if (document.getElementById("adn-video-js_html5_api") == null) {
+    if (document.getElementsByTagName("video")[0] == null) {
         send_no_video();
         return;
     }
 
-    var currentTime = Math.floor(document.getElementById("adn-video-js_html5_api").currentTime),
-        duration =  Math.floor(document.getElementById("adn-video-js_html5_api").duration);
+    var currentTime = Math.floor(document.getElementsByTagName("video")[0].currentTime),
+        duration =  Math.floor(document.getElementsByTagName("video")[0].duration);
 
     if (isNaN(currentTime) || isNaN(duration)) {
         return;
     }
 
-    var title = document.getElementsByClassName("adn-player-header")[0].children[0].children[0].innerHTML,
-        episode = document.getElementsByClassName("adn-player-header")[0].children[0].children[1].innerHTML.trim(),
-        playing = !document.getElementById("adn-video-js_html5_api").paused;
+    var title = document.getElementsByTagName("h1")[0].children[1].innerHTML,
+        episode = document.getElementsByTagName("h1")[0].children[0].innerHTML.trim(),
+        playing = !document.getElementsByTagName("video")[0].paused;
 
     if (!title || !episode) {
         send_no_video();
